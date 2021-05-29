@@ -1,0 +1,14 @@
+<div class="container-fluid container-selector-ball">
+  <div class="row">
+    <div class="col-12">
+      <h2>Números</h2>
+    </div>
+    <div class="col-12 numbers-selectors">
+
+      <lottery-balls-selection #lotteryBallsSelection (lotteryBallSelectedEvent)="lotteryBallSelected($event)"></lottery-balls-selection>
+    </div>
+    <div class="col-12 col-clear-selection">
+      <p><span (click)="clearSelection()">Clear selection</span></p>
+    </div>
+  </div>
+</div>

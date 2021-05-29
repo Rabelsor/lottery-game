@@ -1,0 +1,5 @@
+<ul  [@listAnimation]="this.lotteryBalls.length">
+  <li *ngFor="let ball of this.lotteryBalls; index as i; trackBy: trackByBalls" [ngClass]="{'deactivated': this.lotteryBallSelected.includes(i+1)}">
+    <lottery-ball [ballNumber]="i+1" (click)="addBall(i+1)"></lottery-ball>
+  </li>
+</ul>

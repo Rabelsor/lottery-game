@@ -1,0 +1,17 @@
+.main-container {
+  background-color: grey;
+  max-height: 100vh;
+  min-height: 100vh;
+
+  .row {
+    height: 100vh;
+  }
+
+  .col-ball-selector {
+    padding: 15px;
+  }
+
+  .col-bet-split {
+    padding: 15px;
+  }
+}

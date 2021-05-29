@@ -1,0 +1,28 @@
+ul {
+  list-style: none;
+  display: inline-flex;
+
+  li {
+    margin-right: 5px;
+    cursor: pointer;
+  }
+}
+
+.deactivated {
+  opacity: 0.5;
+}
+
+li {
+  animation-duration: 3s;
+  animation-name: slidein;
+}
+
+@keyframes slidein {
+  from {
+    padding-top: 4em;
+  }
+
+  to {
+    padding-top: 0em;
+  }
+}
