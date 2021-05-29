@@ -1,11 +1,19 @@
 ul {
   list-style: none;
   display: inline-flex;
+  padding-left: 0;
 
   li {
     margin-right: 5px;
     cursor: pointer;
   }
+}
+
+.alert {
+  position: absolute;
+  bottom: 5px;
+  width: 50%;
+  justify-content: center;
 }
 
 .deactivated {

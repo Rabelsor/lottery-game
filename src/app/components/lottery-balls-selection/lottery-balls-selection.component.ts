@@ -15,6 +15,15 @@ import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/cor
           ])
         ])
       ])
+    ]),
+    trigger('queryAnimation', [
+      transition('* => goAnimate', [
+        // hide the inner elements
+        query('div', style({ opacity: 0 })),
+
+        // animate the inner elements in, one by one
+        query('div', animate(1000, style({ opacity: 1 }))),
+      ])
     ])
   ],
   styleUrls: ['./lottery-balls-selection.component.scss']
@@ -26,8 +35,7 @@ export class LotteryBallsSelectionComponent implements OnInit {
   public lotteryBalls = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   public lotteryBallSelected: number[] = [];
 
-
-  closeResult = '';
+  public noMoreBalls = false;
 
   constructor() { }
 
@@ -44,7 +52,11 @@ export class LotteryBallsSelectionComponent implements OnInit {
       this.lotteryBallSelectedEvent.emit(this.lotteryBallSelected);
     } else if(this.lotteryBallSelected.length === 8) {
       console.log('TODO: mensaje ya no agregas más');
+      this.noMoreBalls = true;
 
+      setTimeout(() => {
+        this.noMoreBalls = false;
+      }, 3000);
     }
   }
 
