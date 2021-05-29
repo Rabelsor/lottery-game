@@ -47,11 +47,10 @@ export class LotteryBallsSelectionComponent implements OnInit {
   }
 
   addBall(numberBall: number): void {
-    if(!this.lotteryBallSelected.includes(numberBall) && this.lotteryBallSelected.length < 8) {
+    if(!this.lotteryBallSelected.includes(numberBall) && this.lotteryBallSelected.length === 0) {
       this.lotteryBallSelected.push(numberBall);
       this.lotteryBallSelectedEvent.emit(this.lotteryBallSelected);
-    } else if(this.lotteryBallSelected.length === 8) {
-      console.log('TODO: mensaje ya no agregas más');
+    } else if(this.lotteryBallSelected.length === 1) {
       this.noMoreBalls = true;
 
       setTimeout(() => {
