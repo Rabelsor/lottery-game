@@ -32,6 +32,20 @@
       </div>
     </div>
   </div>
+
+  <div [@queryAnimation]="'goAnimate'" *ngIf="this.noBall">
+    <div class="alert alert-danger" role="alert">
+      No has seleccionado ninguna bola
+    </div>
+  </div>
+
+  <div [@queryAnimation]="'goAnimate'" *ngIf="this.minAmmount">
+    <div class="alert alert-danger" role="alert">
+      La cantidad mínima son 5€
+    </div>
+  </div>
+
+
 </div>
 
 <ngx-spinner></ngx-spinner>

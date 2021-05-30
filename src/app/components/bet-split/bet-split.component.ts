@@ -2,10 +2,23 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Bet } from 'src/app/models/bet';
 import { CommunicatorService } from 'src/app/services/communicator.service';
+import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
+
 
 @Component({
   selector: 'bet-split',
   templateUrl: './bet-split.component.html',
+  animations: [
+    trigger('queryAnimation', [
+      transition('* => goAnimate', [
+        // hide the inner elements
+        query('div', style({ opacity: 0 })),
+
+        // animate the inner elements in, one by one
+        query('div', animate(1000, style({ opacity: 1 }))),
+      ])
+    ])
+  ],
   styleUrls: ['./bet-split.component.scss']
 })
 export class BetSplitComponent implements OnInit {
@@ -14,6 +27,9 @@ export class BetSplitComponent implements OnInit {
   public ballSelectToBet: number;
   public totalAmmountDisplay: number = 0;
   public stack: number = 0;
+
+  public noBall: boolean = false;
+  public minAmmount: boolean = false;
 
   public betForm: FormGroup;
 
@@ -28,7 +44,6 @@ export class BetSplitComponent implements OnInit {
     })
 
     this.communicatorService.announcedSelectBall$.subscribe(response => {
-      // TODO: comprobar lista de apuestas y sumar este:
       if (response) {
         this.ballSelectToBet = response;
         this.lotteryBallsBet.push(this.ballSelectToBet);
@@ -62,16 +77,17 @@ export class BetSplitComponent implements OnInit {
           this.ballSelectToBet = undefined;
           this.stack++;
         } else {
-          // TODO: no has seleccionado ninguna bola
-          console.log('no has seleccionado ninguna bola');
+          this.noBall = true;
+          setTimeout(() => {
+            this.noBall = false;
+          }, 3000);
         }
       } else {
-        // TODO: warning no has apostado algo válido, 5€ o más
-        console.log('warning no has apostado algo válido, 5€ o más');
+        this.minAmmount = true;
+          setTimeout(() => {
+            this.minAmmount = false;
+          }, 3000);
       }
-    } else {
-      // TODO: warning no se adminten más apuestas
-      console.log('no se admiten más apuestas');
     }
   }
 
@@ -85,7 +101,6 @@ export class BetSplitComponent implements OnInit {
   }
 
   placeBet() {
-    // TODO: realizar apuesta
     this.communicatorService.announcePlaceBets(true);
   }
 }

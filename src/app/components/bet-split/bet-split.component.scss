@@ -8,16 +8,9 @@
     width: 2.5em;
     height: 2.5em;
   }
-
-  .bet-split-form {
-    // display: flex;
-    // position: absolute;
-    // top: 30%;
-  }
-
   .balls-ammount {
     min-height: 30%;
-    overflow-x: scroll;
+    overflow-x: auto;
   }
 
   .bet-ammount {
@@ -28,4 +21,10 @@
       width: 100%;
     }
   }
+
+  .alert {
+    text-align: center;
+  }
 }
+
+

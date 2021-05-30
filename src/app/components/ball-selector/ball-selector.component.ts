@@ -55,7 +55,6 @@ export class BallSelectorComponent implements OnInit {
       this.lotteryBallSelectedEvent.emit(event);
       this.communicatorService.announceSelectBall(event);
     } else {
-      // TODO: no se admiten más apuestas
       this.lotteryBallsSelection.lotteryBallSelected = undefined;
       this.lotteryBallsSelection.noMoreBallsWarning();
     }
@@ -70,7 +69,6 @@ export class BallSelectorComponent implements OnInit {
   }
 
   placeBets() {
-    // TODO: registrar y comprobar todas las apuestas
     // TODO: llamar a una API que devuelva un númro aleatorio entre 1 y 10
     this.spinner.show();
     this.resultNumber = 5;
@@ -89,6 +87,7 @@ export class BallSelectorComponent implements OnInit {
   resetGame() {
     this.showResult = false;
     this.winBet = undefined;
+    this.resultNumber = undefined;
     this.communicatorService.announceTotalBet(0);
     this.communicatorService.announceBets(null);
   }

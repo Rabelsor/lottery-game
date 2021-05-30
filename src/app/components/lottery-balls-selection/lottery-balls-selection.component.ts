@@ -1,7 +1,5 @@
 import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { CommunicatorService } from 'src/app/services/communicator.service';
-
 
 @Component({
   selector: 'lottery-balls-selection',
