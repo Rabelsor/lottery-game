@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Bet } from 'src/app/models/bet';
 import { CommunicatorService } from 'src/app/services/communicator.service';
 import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -21,7 +22,7 @@ import { animate, query, stagger, style, transition, trigger } from '@angular/an
   ],
   styleUrls: ['./bet-split.component.scss']
 })
-export class BetSplitComponent implements OnInit {
+export class BetSplitComponent implements OnInit, OnDestroy {
 
   public lotteryBallsBet: number[] = [];
   public ballSelectToBet: number;
@@ -32,6 +33,10 @@ export class BetSplitComponent implements OnInit {
   public minAmmount: boolean = false;
 
   public betForm: FormGroup;
+
+  private announcedSelectBallSubscription: Subscription;
+  private announcedTotalBetSubscription: Subscription;
+  private announcedBetsSubscription: Subscription;
 
   constructor(
     private communicatorService: CommunicatorService,
@@ -65,6 +70,18 @@ export class BetSplitComponent implements OnInit {
         });
       }
     });
+  }
+
+  ngOnDestroy() {
+    if(this.announcedSelectBallSubscription) {
+      this.announcedSelectBallSubscription.unsubscribe();
+    }
+    if(this.announcedTotalBetSubscription) {
+      this.announcedTotalBetSubscription.unsubscribe();
+    }
+    if(this.announcedBetsSubscription) {
+      this.announcedBetsSubscription.unsubscribe();
+    }
   }
 
   public checkBet() {
