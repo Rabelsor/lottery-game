@@ -31,3 +31,19 @@
 .ball-10{
   background-color: $color-ball-10;
 }
+
+
+.col-clear-selection {
+  display: flex;
+  justify-content: center;
+  color: #0d6efd;
+  margin-top: 1em;
+  font-size: 1.5em;
+  p span {
+    cursor: pointer;
+
+    &:hover {
+      color: black;
+    }
+  }
+}

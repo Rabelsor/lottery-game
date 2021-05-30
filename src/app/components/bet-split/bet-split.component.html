@@ -1,1 +1,51 @@
-<p>bet-split works!</p>
+<div class="container-fluid container-bet-split">
+  <div class="row balls-ammount">
+    <div class="col-12">
+      <lottery-balls-selection [lotteryBalls]="this.lotteryBallsBet"></lottery-balls-selection>
+    </div>
+  </div>
+  <div class="bet-split-form mb-3">
+    <form [formGroup]="this.betForm">
+      <div class="input-group">
+        <span class="input-group-text">x{{this.stack}}</span>
+        <input type="number" class="form-control" formControlName="bet" aria-label="Cantidad a apostar">
+        <button type="button" class="btn btn-primary" (click)="checkBet()">Ok</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="bet-ammount">
+    <div class="row mb-4">
+      <div class="col-12">
+        <h3>TOTAL: {{this.totalAmmountDisplay}}€</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <button type="button" class="btn btn-primary" (click)="this.placeBet()">Apostar</button>
+      </div>
+    </div>
+
+    <div class="row mt-5">
+      <div class="col-12 col-clear-selection">
+        <p><span (click)="clearAllBets()">Borrar todas las apuestas</span></p>
+      </div>
+    </div>
+  </div>
+
+  <div [@queryAnimation]="'goAnimate'" *ngIf="this.noBall">
+    <div class="alert alert-danger" role="alert">
+      No has seleccionado ninguna bola
+    </div>
+  </div>
+
+  <div [@queryAnimation]="'goAnimate'" *ngIf="this.minAmmount">
+    <div class="alert alert-danger" role="alert">
+      La cantidad mínima son 5€
+    </div>
+  </div>
+
+
+</div>
+
+<ngx-spinner></ngx-spinner>

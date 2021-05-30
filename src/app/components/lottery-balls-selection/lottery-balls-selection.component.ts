@@ -1,6 +1,5 @@
 import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
-import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
-
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'lottery-balls-selection',
@@ -8,12 +7,21 @@ import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/cor
   animations: [
     trigger('listAnimation', [
       transition('* => *', [ // each time the binding value changes
-        query(':enter', [
+        query(':enter',  [
           style({ opacity: 0 }),
           stagger(100, [
             animate('0.5s', style({ opacity: 1 }))
           ])
-        ])
+        ], {optional: true})
+      ])
+    ]),
+    trigger('queryAnimation', [
+      transition('* => goAnimate', [
+        // hide the inner elements
+        query('div', style({ opacity: 0 })),
+
+        // animate the inner elements in, one by one
+        query('div', animate(1000, style({ opacity: 1 }))),
       ])
     ])
   ],
@@ -21,13 +29,12 @@ import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/cor
 })
 export class LotteryBallsSelectionComponent implements OnInit {
 
-  @Output() lotteryBallSelectedEvent: EventEmitter<number[]> = new EventEmitter<number[]>();
+  @Input() lotteryBalls = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  @Output() lotteryBallSelectedEvent: EventEmitter<number> = new EventEmitter<number>();
 
-  public lotteryBalls = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-  public lotteryBallSelected: number[] = [];
+  public lotteryBallSelected: number;
 
-
-  closeResult = '';
+  public noMoreBalls = false;
 
   constructor() { }
 
@@ -39,19 +46,25 @@ export class LotteryBallsSelectionComponent implements OnInit {
   }
 
   addBall(numberBall: number): void {
-    if(!this.lotteryBallSelected.includes(numberBall) && this.lotteryBallSelected.length < 8) {
-      this.lotteryBallSelected.push(numberBall);
+    if(!this.lotteryBallSelected) {
+      this.lotteryBallSelected = numberBall;
       this.lotteryBallSelectedEvent.emit(this.lotteryBallSelected);
-    } else if(this.lotteryBallSelected.length === 8) {
-      console.log('TODO: mensaje ya no agregas más');
-
+    } else {
+      this.noMoreBallsWarning();
     }
   }
 
   clearSelection() {
-    this.lotteryBallSelected.splice(0, this.lotteryBallSelected.length);
+    this.lotteryBallSelected = undefined;
     this.lotteryBallSelectedEvent.emit(this.lotteryBallSelected);
+  }
 
+  noMoreBallsWarning() {
+    this.noMoreBalls = true;
+
+    setTimeout(() => {
+      this.noMoreBalls = false;
+    }, 3000);
   }
 
 }

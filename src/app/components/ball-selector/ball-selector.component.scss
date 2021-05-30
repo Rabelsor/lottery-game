@@ -8,23 +8,15 @@
     margin-bottom: 1em;
   }
 
-  .col-clear-selection {
-    display: flex;
-    justify-content: center;
-    color: #0d6efd;
-    margin-top: 2em;
-    font-size: 1.5em;
-    p span {
-      cursor: pointer;
-
-      &:hover {
-        color: black;
-      }
-    }
-  }
-
   .numbers-selectors {
     display: flex;
     justify-content: center;
+    overflow-x: auto;
+  }
+
+  .win-bet {
+    height: 100%;
+    align-items: center;
+    text-align: center;
   }
 }
