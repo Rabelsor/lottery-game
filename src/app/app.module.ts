@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -9,6 +10,9 @@ import { BallSelectorComponent } from './components/ball-selector/ball-selector.
 import { BetSplitComponent } from './components/bet-split/bet-split.component';
 import { LotteryBallComponent } from './components/lottery-ball/lottery-ball.component';
 import { LotteryBallsSelectionComponent } from './components/lottery-balls-selection/lottery-balls-selection.component';
+import { CommunicatorService } from './services/communicator.service';
+import { NgxSpinnerModule } from "ngx-spinner";
+
 
 @NgModule({
   declarations: [
@@ -21,9 +25,14 @@ import { LotteryBallsSelectionComponent } from './components/lottery-balls-selec
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgxSpinnerModule
   ],
-  providers: [],
+  providers: [
+    CommunicatorService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,14 +1,31 @@
 <div class="container-fluid container-selector-ball">
-  <div class="row">
+  <div class="row" *ngIf="!this.showResult">
     <div class="col-12">
       <h2>Números</h2>
     </div>
     <div class="col-12 numbers-selectors">
 
-      <lottery-balls-selection #lotteryBallsSelection (lotteryBallSelectedEvent)="lotteryBallSelected($event)"></lottery-balls-selection>
+      <lottery-balls-selection #lotteryBallsSelection (lotteryBallSelectedEvent)="lotteryBallSelected($event)">
+      </lottery-balls-selection>
     </div>
     <div class="col-12 col-clear-selection">
       <p><span (click)="clearSelection()">Clear selection</span></p>
+    </div>
+  </div>
+
+  <div class="row win-bet" *ngIf="this.showResult">
+    <div *ngIf="this.winBet">
+      <lottery-balls-selection [lotteryBalls]="[this.winBet.ball]"></lottery-balls-selection>
+      <div class="col-12">
+        <h2>Has ganado: {{this.winBet.ammount}}€</h2>
+      </div>
+    </div>
+    <div *ngIf="!this.winBet">
+      <lottery-balls-selection [lotteryBalls]="[this.resultNumber]"></lottery-balls-selection>
+      <h2>Has perdido, tu bola no ha sido premiada</h2>
+    </div>
+    <div class="col-12 col-clear-selection">
+      <p><span (click)="resetGame()">Probar de nuevo</span></p>
     </div>
   </div>
 </div>

@@ -1,0 +1,31 @@
+.container-bet-split {
+  background-color: white;
+  height: 100%;
+  display: block;
+  padding-top: 1em;
+
+  ::ng-deep .circle {
+    width: 2.5em;
+    height: 2.5em;
+  }
+
+  .bet-split-form {
+    // display: flex;
+    // position: absolute;
+    // top: 30%;
+  }
+
+  .balls-ammount {
+    min-height: 30%;
+    overflow-x: scroll;
+  }
+
+  .bet-ammount {
+    text-align: center;
+
+    button {
+      font-size: 1.5em;
+      width: 100%;
+    }
+  }
+}
