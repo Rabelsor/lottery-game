@@ -14,13 +14,13 @@
   </div>
 
   <div class="row win-bet" *ngIf="this.showResult">
-    <div *ngIf="this.winBet">
+    <div *ngIf="this.winBet.ball > 0">
       <lottery-balls-selection [lotteryBalls]="[this.winBet.ball]"></lottery-balls-selection>
       <div class="col-12">
         <h2>Has ganado: {{this.winBet.ammount}}€</h2>
       </div>
     </div>
-    <div *ngIf="!this.winBet">
+    <div *ngIf="this.winBet.ball === 0">
       <lottery-balls-selection [lotteryBalls]="[this.resultNumber]"></lottery-balls-selection>
       <h2>Has perdido, tu bola no ha sido premiada</h2>
     </div>

@@ -90,9 +90,11 @@ export class BallSelectorComponent implements OnInit, OnDestroy {
   placeBets() {
     this.spinner.show();
     this.resultNumber = Math.floor(Math.random() * (10 - 1 + 1) + 1);
+    this.winBet= new Bet(0, 0);
     this.listOfBets.forEach(element => {
       if (element.ball === this.resultNumber) {
-        this.winBet = new Bet(element.ball, element.ammount * 1.5);
+        this.winBet.ball = element.ball;
+        this.winBet.ammount += element.ammount * 1.5;
       }
     });
     setTimeout(() => {
