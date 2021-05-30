@@ -90,7 +90,7 @@ export class BallSelectorComponent implements OnInit, OnDestroy {
   placeBets() {
     // TODO: llamar a una API que devuelva un númro aleatorio entre 1 y 10
     this.spinner.show();
-    this.resultNumber = 5;
+    this.resultNumber = Math.floor(Math.random() * (10 - 1 + 1) + 1);
     this.listOfBets.forEach(element => {
       if (element.ball === this.resultNumber) {
         this.winBet = new Bet(element.ball, element.ammount * 1.5);
