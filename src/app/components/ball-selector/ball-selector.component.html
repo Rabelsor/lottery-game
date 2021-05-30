@@ -1,7 +1,7 @@
 <div class="container-fluid container-selector-ball">
   <div class="row" *ngIf="!this.showResult">
     <div class="col-12">
-      <h2>Números</h2>
+      <h2>{{"BALL-SELECTOR.NUMBERS" | translate}}</h2>
     </div>
     <div class="numbers-selectors">
 
@@ -9,7 +9,7 @@
       </lottery-balls-selection>
     </div>
     <div class="col-12 col-clear-selection">
-      <p><span (click)="clearSelection()">Clear selection</span></p>
+      <p><span (click)="clearSelection()">{{"BALL-SELECTOR.CLEAR-SELECTION" | translate}}</span></p>
     </div>
   </div>
 
@@ -17,15 +17,15 @@
     <div *ngIf="this.winBet.ball > 0">
       <lottery-balls-selection [lotteryBalls]="[this.winBet.ball]"></lottery-balls-selection>
       <div class="col-12">
-        <h2>Has ganado: {{this.winBet.ammount}}€</h2>
+        <h2>{{"BALL-SELECTOR.WIN" | translate}} {{this.winBet.ammount}}€</h2>
       </div>
     </div>
     <div *ngIf="this.winBet.ball === 0">
       <lottery-balls-selection [lotteryBalls]="[this.resultNumber]"></lottery-balls-selection>
-      <h2>Has perdido, tu bola no ha sido premiada</h2>
+      <h2>{{"BALL-SELECTOR.LOSE" | translate}}</h2>
     </div>
     <div class="col-12 col-clear-selection">
-      <p><span (click)="resetGame()">Probar de nuevo</span></p>
+      <p><span (click)="resetGame()">{{"BALL-SELECTOR.TRY-AGAIN" | translate}}</span></p>
     </div>
   </div>
 </div>

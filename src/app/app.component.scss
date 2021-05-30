@@ -15,3 +15,18 @@
     padding: 15px;
   }
 }
+
+.language-selector {
+  position: absolute;
+  top: 1em;
+  left: 1em;
+  cursor: pointer;
+
+  .not-selected-lang {
+    opacity: 1;
+  }
+
+  img {
+    opacity: 0.5;
+  }
+}

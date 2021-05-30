@@ -1,0 +1,20 @@
+{
+  "BALL-SELECTOR": {
+    "NUMBERS": "Números",
+    "CLEAR-SELECTION": "Limpiar selección",
+    "WIN": "Has ganado:",
+    "LOSE": "Has perdido, tu bola no ha sido premiada",
+    "TRY-AGAIN": "Probar de nuevo"
+  },
+  "LOTTERY-SELECTION": {
+    "NO-MORE": "No puedes agregar más bolas"
+  },
+  "BET-SPLIT": {
+    "OK": "Ok",
+    "TOTAL": "TOTAL:",
+    "BET": "Apostar",
+    "CLEAR-BETS": "Borrar todas las apuestas",
+    "NO-BALL": "No has seleccionado ninguna bola",
+    "MIN-AMMOUNT": "La cantidad mínima son 5€"
+  }
+}

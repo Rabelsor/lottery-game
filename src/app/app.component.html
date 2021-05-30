@@ -1,3 +1,13 @@
+<div class="language-selector">
+  <img src="https://flagcdn.com/48x36/es.png" srcset="https://flagcdn.com/32x24/es.png 2x,
+    https://flagcdn.com/48x36/es.png 3x" width="48" height="36" alt="España" (click)="this.changeLanguage('es')"
+    [ngClass]="{'not-selected-lang': this.translate.currentLang === 'es'}">
+  &nbsp;
+  <img src="https://flagcdn.com/48x36/us.png" srcset="https://flagcdn.com/32x24/us.png 2x,
+    https://flagcdn.com/48x36/us.png 3x" width="48" height="36" alt="Estados Unidos" (click)="this.changeLanguage('en')"
+    [ngClass]="{'not-selected-lang': this.translate.currentLang === 'en'}">
+
+</div>
 <div class="container-fluid main-container">
   <div class="row">
     <div class="col-8 col-ball-selector">
