@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Bet } from 'src/app/models/bet';
 import { CommunicatorService } from 'src/app/services/communicator.service';
-import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
+import { animate, query, style, transition, trigger } from '@angular/animations';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -21,7 +22,11 @@ import { animate, query, stagger, style, transition, trigger } from '@angular/an
   ],
   styleUrls: ['./bet-split.component.scss']
 })
-export class BetSplitComponent implements OnInit {
+export class BetSplitComponent implements OnInit, OnDestroy {
+
+  @ViewChild('scrollLottery', { static: false }) scrollLottery: ElementRef;
+
+  private scrollContainer: any;
 
   public lotteryBallsBet: number[] = [];
   public ballSelectToBet: number;
@@ -30,8 +35,14 @@ export class BetSplitComponent implements OnInit {
 
   public noBall: boolean = false;
   public minAmmount: boolean = false;
+  public noBets: boolean = false;
+  public betMade: boolean = false;
 
   public betForm: FormGroup;
+
+  private announcedSelectBallSubscription: Subscription;
+  private announcedTotalBetSubscription: Subscription;
+  private announcedBetsSubscription: Subscription;
 
   constructor(
     private communicatorService: CommunicatorService,
@@ -44,6 +55,7 @@ export class BetSplitComponent implements OnInit {
     })
 
     this.communicatorService.announcedSelectBall$.subscribe(response => {
+      this.scrollToBottom();
       if (response) {
         this.ballSelectToBet = response;
         this.lotteryBallsBet.push(this.ballSelectToBet);
@@ -55,6 +67,9 @@ export class BetSplitComponent implements OnInit {
 
     this.communicatorService.announcedTotalBet$.subscribe(response => {
       this.totalAmmountDisplay = response;
+      if(this.totalAmmountDisplay === 0) {
+        this.betMade = false;
+      }
     });
 
     this.communicatorService.announcedBets$.subscribe(response => {
@@ -65,6 +80,22 @@ export class BetSplitComponent implements OnInit {
         });
       }
     });
+  }
+
+  ngOnDestroy() {
+    if (this.announcedSelectBallSubscription) {
+      this.announcedSelectBallSubscription.unsubscribe();
+    }
+    if (this.announcedTotalBetSubscription) {
+      this.announcedTotalBetSubscription.unsubscribe();
+    }
+    if (this.announcedBetsSubscription) {
+      this.announcedBetsSubscription.unsubscribe();
+    }
+  }
+
+  ngAfterViewInit() {
+    this.scrollContainer = this.scrollLottery.nativeElement;
   }
 
   public checkBet() {
@@ -84,9 +115,9 @@ export class BetSplitComponent implements OnInit {
         }
       } else {
         this.minAmmount = true;
-          setTimeout(() => {
-            this.minAmmount = false;
-          }, 3000);
+        setTimeout(() => {
+          this.minAmmount = false;
+        }, 3000);
       }
     }
   }
@@ -95,12 +126,31 @@ export class BetSplitComponent implements OnInit {
     this.communicatorService.announceBets(undefined);
     this.communicatorService.announceTotalBet(0);
     this.stack = 0;
-    if(this.ballSelectToBet) {
+    this.betMade = false;
+    if (this.ballSelectToBet) {
       this.lotteryBallsBet.push(this.ballSelectToBet);
     }
   }
 
   placeBet() {
-    this.communicatorService.announcePlaceBets(true);
+    console.log(this.betMade);
+    if (this.totalAmmountDisplay && this.totalAmmountDisplay > 0 && !this.betMade) {
+      this.betMade = true;
+      this.communicatorService.announcePlaceBets(true);
+    } else {
+      this.noBets = true;
+      setTimeout(() => {
+        this.noBets = false;
+      }, 3000);
+    }
   }
+
+  private scrollToBottom(): void {
+    this.scrollContainer.scroll({
+      top: this.scrollContainer.scrollHeight,
+      left: this.scrollContainer.scrollWidth,
+      behavior: 'smooth',
+    });
+  }
+
 }

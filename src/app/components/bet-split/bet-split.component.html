@@ -1,15 +1,18 @@
 <div class="container-fluid container-bet-split">
-  <div class="row balls-ammount">
+  <div class="row balls-ammount" #scrollLottery>
     <div class="col-12">
       <lottery-balls-selection [lotteryBalls]="this.lotteryBallsBet"></lottery-balls-selection>
     </div>
   </div>
-  <div class="bet-split-form mb-3">
+  <div class=" row mb-3" [ngClass]="{
+    'bet-split-form-whitout-balls': !this.lotteryBallsBet || !this.lotteryBallsBet.length,
+    'bet-split-form-whith-balls': this.lotteryBallsBet && this.lotteryBallsBet.length
+  }">
     <form [formGroup]="this.betForm">
       <div class="input-group">
         <span class="input-group-text">x{{this.stack}}</span>
-        <input type="number" class="form-control" formControlName="bet" aria-label="Cantidad a apostar">
-        <button type="button" class="btn btn-primary" (click)="checkBet()">Ok</button>
+        <input type="number" class="form-control" formControlName="bet">
+        <button type="button" class="btn btn-primary" (click)="checkBet()"> {{"BET-SPLIT.OK" | translate}}</button>
       </div>
     </form>
   </div>
@@ -17,35 +20,43 @@
   <div class="bet-ammount">
     <div class="row mb-4">
       <div class="col-12">
-        <h3>TOTAL: {{this.totalAmmountDisplay}}€</h3>
+        <h3>{{"BET-SPLIT.TOTAL" | translate}} {{this.totalAmmountDisplay}}€</h3>
       </div>
     </div>
     <div class="row">
       <div class="col-12">
-        <button type="button" class="btn btn-primary" (click)="this.placeBet()">Apostar</button>
+        <button type="button" class="btn btn-primary" (click)="this.placeBet()">{{"BET-SPLIT.BET" | translate}}</button>
       </div>
     </div>
 
     <div class="row mt-5">
       <div class="col-12 col-clear-selection">
-        <p><span (click)="clearAllBets()">Borrar todas las apuestas</span></p>
+        <p><span (click)="clearAllBets()">{{"BET-SPLIT.CLEAR-BETS" | translate}}</span></p>
       </div>
     </div>
   </div>
 
   <div [@queryAnimation]="'goAnimate'" *ngIf="this.noBall">
     <div class="alert alert-danger" role="alert">
-      No has seleccionado ninguna bola
+      {{"BET-SPLIT.NO-BALL" | translate}}
     </div>
   </div>
 
   <div [@queryAnimation]="'goAnimate'" *ngIf="this.minAmmount">
     <div class="alert alert-danger" role="alert">
-      La cantidad mínima son 5€
+      {{"BET-SPLIT.MIN-AMMOUNT" | translate}}
+    </div>
+  </div>
+
+  <div [@queryAnimation]="'goAnimate'" *ngIf="this.noBets">
+    <div class="alert alert-danger" role="alert">
+      {{"BET-SPLIT.NO-BETS" | translate}}
     </div>
   </div>
 
 
 </div>
 
-<ngx-spinner></ngx-spinner>
+<ngx-spinner bdColor="rgba(64,59,59,0.8)" size="large" color="#946060" type="square-jelly-box" [fullScreen]="true">
+  <p style="color: white"> {{"BET-SPLIT.RESULTS" | translate}} </p>
+</ngx-spinner>

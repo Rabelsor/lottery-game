@@ -1,12 +1,14 @@
 <ul [@listAnimation]="this.lotteryBalls && this.lotteryBalls.length">
   <li *ngFor="let ball of this.lotteryBalls; index as i; trackBy: trackByBalls"
     [ngClass]="{'deactivated': this.lotteryBallSelected && this.lotteryBallSelected !== i+1}">
-    <lottery-ball [ballNumber]="ball" (click)="addBall(ball)"></lottery-ball>
+    <div class="ball-container">
+      <lottery-ball [ballNumber]="ball" (click)="addBall(ball)"></lottery-ball>
+    </div>
   </li>
 </ul>
 
 <div [@queryAnimation]="'goAnimate'" *ngIf="this.noMoreBalls">
   <div class="alert alert-danger" role="alert">
-    No puedes agregar más bolas
+    {{"LOTTERY-SELECTION.NO-MORE" | translate}}
   </div>
 </div>

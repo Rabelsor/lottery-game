@@ -12,6 +12,13 @@ import { LotteryBallComponent } from './components/lottery-ball/lottery-ball.com
 import { LotteryBallsSelectionComponent } from './components/lottery-balls-selection/lottery-balls-selection.component';
 import { CommunicatorService } from './services/communicator.service';
 import { NgxSpinnerModule } from "ngx-spinner";
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 
 
 @NgModule({
@@ -28,7 +35,15 @@ import { NgxSpinnerModule } from "ngx-spinner";
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ],
   providers: [
     CommunicatorService

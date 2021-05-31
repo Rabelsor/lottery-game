@@ -3,20 +3,23 @@
   height: 100%;
   display: block;
 
-  .col-12:first-child {
-    padding-top: 8em;
+
+  h2:first-child {
+    padding-top: 4em;
     margin-bottom: 1em;
   }
 
   .numbers-selectors {
     display: flex;
-    justify-content: center;
+    text-align: center;
     overflow-x: auto;
+    overflow-y: hidden;
   }
 
   .win-bet {
     height: 100%;
     align-items: center;
     text-align: center;
+    padding-top: 5em;
   }
 }

@@ -1,5 +1,6 @@
-import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Subscription } from 'rxjs';
 import { Bet } from 'src/app/models/bet';
 import { CommunicatorService } from 'src/app/services/communicator.service';
 import { LotteryBallsSelectionComponent } from '../lottery-balls-selection/lottery-balls-selection.component';
@@ -9,7 +10,7 @@ import { LotteryBallsSelectionComponent } from '../lottery-balls-selection/lotte
   templateUrl: './ball-selector.component.html',
   styleUrls: ['./ball-selector.component.scss']
 })
-export class BallSelectorComponent implements OnInit {
+export class BallSelectorComponent implements OnInit, OnDestroy {
 
   @ViewChild('lotteryBallsSelection', { static: false }) lotteryBallsSelection: LotteryBallsSelectionComponent;
 
@@ -23,25 +24,41 @@ export class BallSelectorComponent implements OnInit {
   public resultNumber: number;
 
 
+  private announcedBetSubscription: Subscription;
+  private announcedBetsSubscription: Subscription;
+  private announcedPlaceBetsSubscription: Subscription;
+
   constructor(
     private communicatorService: CommunicatorService,
     private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
-    this.communicatorService.announcedBet$.subscribe(response => {
+    this.announcedBetSubscription = this.communicatorService.announcedBet$.subscribe(response => {
       this.registerNewBet(response);
     });
-    this.communicatorService.announcedBets$.subscribe(response => {
+    this.announcedBetsSubscription = this.communicatorService.announcedBets$.subscribe(response => {
       if (!response) {
         this.listOfBets = [];
         this.totalBetAmmount = 0;
       }
     });
-    this.communicatorService.announcedPlaceBets$.subscribe(response => {
+    this.announcedPlaceBetsSubscription = this.communicatorService.announcedPlaceBets$.subscribe(response => {
       if (response) {
         this.placeBets();
       }
     })
+  }
+
+  ngOnDestroy() {
+    if(this.announcedBetSubscription) {
+      this.announcedBetSubscription.unsubscribe();
+    }
+    if(this.announcedBetsSubscription) {
+      this.announcedBetsSubscription.unsubscribe();
+    }
+    if(this.announcedPlaceBetsSubscription) {
+      this.announcedPlaceBetsSubscription.unsubscribe();
+    }
   }
 
   clearSelection() {
@@ -69,12 +86,14 @@ export class BallSelectorComponent implements OnInit {
   }
 
   placeBets() {
-    // TODO: llamar a una API que devuelva un númro aleatorio entre 1 y 10
     this.spinner.show();
-    this.resultNumber = 5;
+    this.scrollToTop();
+    this.resultNumber = Math.floor(Math.random() * (10 - 1 + 1) + 1);
+    this.winBet= new Bet(0, 0);
     this.listOfBets.forEach(element => {
       if (element.ball === this.resultNumber) {
-        this.winBet = new Bet(element.ball, element.ammount * 1.5);
+        this.winBet.ball = element.ball;
+        this.winBet.ammount += element.ammount * 1.5;
       }
     });
     setTimeout(() => {
@@ -90,6 +109,10 @@ export class BallSelectorComponent implements OnInit {
     this.resultNumber = undefined;
     this.communicatorService.announceTotalBet(0);
     this.communicatorService.announceBets(null);
+  }
+
+  private scrollToTop(): void {
+    window.scroll(0,0);
   }
 
 }

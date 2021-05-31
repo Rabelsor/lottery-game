@@ -13,5 +13,21 @@
 
   .col-bet-split {
     padding: 15px;
+    height: 100%;
+  }
+}
+
+.language-selector {
+  position: absolute;
+  top: 1em;
+  left: 1em;
+  cursor: pointer;
+
+  .not-selected-lang {
+    opacity: 1;
+  }
+
+  img {
+    opacity: 0.5;
   }
 }

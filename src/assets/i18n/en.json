@@ -1,0 +1,22 @@
+{
+  "BALL-SELECTOR": {
+    "NUMBERS": "Numbers",
+    "CLEAR-SELECTION": "Clear selection",
+    "WIN": "You won:",
+    "LOSE": "You lose, your ball has not been rewarded",
+    "TRY-AGAIN": "Try again"
+  },
+  "LOTTERY-SELECTION": {
+    "NO-MORE": "You can't add more balls"
+  },
+  "BET-SPLIT": {
+    "OK": "Ok",
+    "TOTAL": "TOTAL:",
+    "BET": "Place bet",
+    "CLEAR-BETS": "Clear all bets",
+    "NO-BALL": "    You haven't selected any balls",
+    "MIN-AMMOUNT": "The minimum amount is 5€",
+    "NO-BETS": "No bet has been placed",
+    "RESULTS": "Getting results..."
+  }
+}

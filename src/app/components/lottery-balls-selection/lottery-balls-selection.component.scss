@@ -6,21 +6,26 @@ ul {
   li {
     margin-right: 5px;
     cursor: pointer;
+    position: relative;
+  width: 4em;
+  height: 4em;
   }
 }
 
 .alert {
   position: absolute;
-  bottom: 5px;
+  top: 65px;
   width: 50%;
   justify-content: center;
+  text-align: center;
 }
 
 .deactivated {
   opacity: 0.5;
 }
 
-li {
+.ball-container {
+  position: absolute;
   animation-duration: 3s;
   animation-name: slidein;
 }
