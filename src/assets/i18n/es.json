@@ -15,6 +15,7 @@
     "BET": "Apostar",
     "CLEAR-BETS": "Borrar todas las apuestas",
     "NO-BALL": "No has seleccionado ninguna bola",
-    "MIN-AMMOUNT": "La cantidad mínima son 5€"
+    "MIN-AMMOUNT": "La cantidad mínima son 5€",
+    "NO-BETS": "No has realizado ninguna apuesta"
   }
 }

@@ -37,7 +37,6 @@
   display: flex;
   justify-content: center;
   color: #0d6efd;
-  margin-top: 1em;
   font-size: 1.5em;
   p span {
     cursor: pointer;
@@ -45,5 +44,19 @@
     &:hover {
       color: black;
     }
+  }
+}
+
+@media (max-width: 576px) {
+  p, button, span {
+    font-size: 0.8em !important;
+  }
+
+  .bet-split-form-whitout-balls {
+    margin-top: 4em !important;
+  }
+
+  .bet-split-form-whith-balls {
+    margin-top: 0.5em !important;
   }
 }

@@ -4,7 +4,10 @@
       <lottery-balls-selection [lotteryBalls]="this.lotteryBallsBet"></lottery-balls-selection>
     </div>
   </div>
-  <div class="bet-split-form mb-3">
+  <div class=" row mb-3" [ngClass]="{
+    'bet-split-form-whitout-balls': !this.lotteryBallsBet || !this.lotteryBallsBet.length,
+    'bet-split-form-whith-balls': this.lotteryBallsBet && this.lotteryBallsBet.length
+  }">
     <form [formGroup]="this.betForm">
       <div class="input-group">
         <span class="input-group-text">x{{this.stack}}</span>
@@ -42,6 +45,12 @@
   <div [@queryAnimation]="'goAnimate'" *ngIf="this.minAmmount">
     <div class="alert alert-danger" role="alert">
       {{"BET-SPLIT.MIN-AMMOUNT" | translate}}
+    </div>
+  </div>
+
+  <div [@queryAnimation]="'goAnimate'" *ngIf="this.noBets">
+    <div class="alert alert-danger" role="alert">
+      {{"BET-SPLIT.NO-BETS" | translate}}
     </div>
   </div>
 

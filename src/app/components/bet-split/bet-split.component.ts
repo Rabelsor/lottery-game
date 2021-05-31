@@ -31,6 +31,8 @@ export class BetSplitComponent implements OnInit, OnDestroy {
 
   public noBall: boolean = false;
   public minAmmount: boolean = false;
+  public noBets: boolean = false;
+  public betMade: boolean = false;
 
   public betForm: FormGroup;
 
@@ -73,13 +75,13 @@ export class BetSplitComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if(this.announcedSelectBallSubscription) {
+    if (this.announcedSelectBallSubscription) {
       this.announcedSelectBallSubscription.unsubscribe();
     }
-    if(this.announcedTotalBetSubscription) {
+    if (this.announcedTotalBetSubscription) {
       this.announcedTotalBetSubscription.unsubscribe();
     }
-    if(this.announcedBetsSubscription) {
+    if (this.announcedBetsSubscription) {
       this.announcedBetsSubscription.unsubscribe();
     }
   }
@@ -101,9 +103,9 @@ export class BetSplitComponent implements OnInit, OnDestroy {
         }
       } else {
         this.minAmmount = true;
-          setTimeout(() => {
-            this.minAmmount = false;
-          }, 3000);
+        setTimeout(() => {
+          this.minAmmount = false;
+        }, 3000);
       }
     }
   }
@@ -112,12 +114,21 @@ export class BetSplitComponent implements OnInit, OnDestroy {
     this.communicatorService.announceBets(undefined);
     this.communicatorService.announceTotalBet(0);
     this.stack = 0;
-    if(this.ballSelectToBet) {
+    this.betMade = false;
+    if (this.ballSelectToBet) {
       this.lotteryBallsBet.push(this.ballSelectToBet);
     }
   }
 
   placeBet() {
-    this.communicatorService.announcePlaceBets(true);
+    if (this.totalAmmountDisplay && this.totalAmmountDisplay > 0 && !this.betMade) {
+      this.betMade = true;
+      this.communicatorService.announcePlaceBets(true);
+    } else {
+      this.noBets = true;
+      setTimeout(() => {
+        this.noBets = false;
+      }, 3000);
+    }
   }
 }

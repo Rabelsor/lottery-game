@@ -3,14 +3,25 @@
   height: 100%;
   display: block;
   padding-top: 1em;
+  min-height: 95vh;
 
   ::ng-deep .circle {
     width: 2.5em;
     height: 2.5em;
   }
+
   .balls-ammount {
     min-height: 30%;
+    max-height: 30%;
     overflow-x: auto;
+  }
+
+  .bet-split-form-whitout-balls {
+    margin-top: 7em;
+  }
+
+  .bet-split-form-whith-balls {
+    margin-top: 3.5em;
   }
 
   .bet-ammount {
@@ -26,5 +37,3 @@
     text-align: center;
   }
 }
-
-

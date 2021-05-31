@@ -4,11 +4,12 @@
       <h2>{{"BALL-SELECTOR.NUMBERS" | translate}}</h2>
     </div>
     <div class="numbers-selectors">
-
-      <lottery-balls-selection #lotteryBallsSelection (lotteryBallSelectedEvent)="lotteryBallSelected($event)">
-      </lottery-balls-selection>
+      <div class="col-12">
+        <lottery-balls-selection #lotteryBallsSelection (lotteryBallSelectedEvent)="lotteryBallSelected($event)">
+        </lottery-balls-selection>
+      </div>
     </div>
-    <div class="col-12 col-clear-selection">
+    <div class="col-12 col-clear-selection mt-5">
       <p><span (click)="clearSelection()">{{"BALL-SELECTOR.CLEAR-SELECTION" | translate}}</span></p>
     </div>
   </div>

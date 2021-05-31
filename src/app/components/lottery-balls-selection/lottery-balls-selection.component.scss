@@ -6,6 +6,9 @@ ul {
   li {
     margin-right: 5px;
     cursor: pointer;
+    position: relative;
+  width: 4em;
+  height: 4em;
   }
 }
 
@@ -21,7 +24,8 @@ ul {
   opacity: 0.5;
 }
 
-li {
+.ball-container {
+  position: absolute;
   animation-duration: 3s;
   animation-name: slidein;
 }
