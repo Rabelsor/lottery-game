@@ -1,8 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Bet } from 'src/app/models/bet';
 import { CommunicatorService } from 'src/app/services/communicator.service';
-import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
+import { animate, query, style, transition, trigger } from '@angular/animations';
 import { Subscription } from 'rxjs';
 
 
@@ -23,6 +23,10 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./bet-split.component.scss']
 })
 export class BetSplitComponent implements OnInit, OnDestroy {
+
+  @ViewChild('scrollLottery', { static: false }) scrollLottery: ElementRef;
+
+  private scrollContainer: any;
 
   public lotteryBallsBet: number[] = [];
   public ballSelectToBet: number;
@@ -51,6 +55,7 @@ export class BetSplitComponent implements OnInit, OnDestroy {
     })
 
     this.communicatorService.announcedSelectBall$.subscribe(response => {
+      this.scrollToBottom();
       if (response) {
         this.ballSelectToBet = response;
         this.lotteryBallsBet.push(this.ballSelectToBet);
@@ -62,6 +67,9 @@ export class BetSplitComponent implements OnInit, OnDestroy {
 
     this.communicatorService.announcedTotalBet$.subscribe(response => {
       this.totalAmmountDisplay = response;
+      if(this.totalAmmountDisplay === 0) {
+        this.betMade = false;
+      }
     });
 
     this.communicatorService.announcedBets$.subscribe(response => {
@@ -84,6 +92,10 @@ export class BetSplitComponent implements OnInit, OnDestroy {
     if (this.announcedBetsSubscription) {
       this.announcedBetsSubscription.unsubscribe();
     }
+  }
+
+  ngAfterViewInit() {
+    this.scrollContainer = this.scrollLottery.nativeElement;
   }
 
   public checkBet() {
@@ -121,6 +133,7 @@ export class BetSplitComponent implements OnInit, OnDestroy {
   }
 
   placeBet() {
+    console.log(this.betMade);
     if (this.totalAmmountDisplay && this.totalAmmountDisplay > 0 && !this.betMade) {
       this.betMade = true;
       this.communicatorService.announcePlaceBets(true);
@@ -131,4 +144,13 @@ export class BetSplitComponent implements OnInit, OnDestroy {
       }, 3000);
     }
   }
+
+  private scrollToBottom(): void {
+    this.scrollContainer.scroll({
+      top: this.scrollContainer.scrollHeight,
+      left: this.scrollContainer.scrollWidth,
+      behavior: 'smooth',
+    });
+  }
+
 }

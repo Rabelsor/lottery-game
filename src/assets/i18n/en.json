@@ -16,6 +16,7 @@
     "CLEAR-BETS": "Clear all bets",
     "NO-BALL": "    You haven't selected any balls",
     "MIN-AMMOUNT": "The minimum amount is 5€",
-    "NO-BETS": "No bet has been placed"
+    "NO-BETS": "No bet has been placed",
+    "RESULTS": "Getting results..."
   }
 }

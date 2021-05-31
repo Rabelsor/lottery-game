@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Subscription } from 'rxjs';
 import { Bet } from 'src/app/models/bet';
@@ -15,8 +15,6 @@ export class BallSelectorComponent implements OnInit, OnDestroy {
   @ViewChild('lotteryBallsSelection', { static: false }) lotteryBallsSelection: LotteryBallsSelectionComponent;
 
   @Output() lotteryBallSelectedEvent: EventEmitter<number> = new EventEmitter<number>();
-
-
 
   private listOfBets: Bet[] = [];
   private totalBetAmmount: number = 0;
@@ -89,6 +87,7 @@ export class BallSelectorComponent implements OnInit, OnDestroy {
 
   placeBets() {
     this.spinner.show();
+    this.scrollToTop();
     this.resultNumber = Math.floor(Math.random() * (10 - 1 + 1) + 1);
     this.winBet= new Bet(0, 0);
     this.listOfBets.forEach(element => {
@@ -110,6 +109,10 @@ export class BallSelectorComponent implements OnInit, OnDestroy {
     this.resultNumber = undefined;
     this.communicatorService.announceTotalBet(0);
     this.communicatorService.announceBets(null);
+  }
+
+  private scrollToTop(): void {
+    window.scroll(0,0);
   }
 
 }
