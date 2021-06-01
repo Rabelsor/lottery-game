@@ -22,4 +22,13 @@ describe('LotteryBallComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('create ball', () => {
+
+    component.ballNumber = 1;
+    fixture.detectChanges();
+
+    expect(fixture.nativeElement.querySelector('h2').innerHTML).toEqual('1');
+
+  });
 });
