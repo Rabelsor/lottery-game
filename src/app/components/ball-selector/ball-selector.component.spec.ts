@@ -1,4 +1,10 @@
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { HttpLoaderFactory } from 'src/app/app.module';
+import { LotteryBallComponent } from '../lottery-ball/lottery-ball.component';
+import { LotteryBallsSelectionComponent } from '../lottery-balls-selection/lottery-balls-selection.component';
 
 import { BallSelectorComponent } from './ball-selector.component';
 
@@ -8,9 +14,24 @@ describe('BallSelectorComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BallSelectorComponent ]
+      declarations: [
+        BallSelectorComponent,
+        LotteryBallComponent,
+        LotteryBallsSelectionComponent
+      ],
+      imports: [
+        BrowserAnimationsModule,
+        HttpClientModule,
+        TranslateModule.forRoot({
+          loader: {
+            provide: TranslateLoader,
+            useFactory: HttpLoaderFactory,
+            deps: [HttpClient]
+          }
+        })
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
@@ -22,4 +43,17 @@ describe('BallSelectorComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('clear selection ball', () => {
+
+    fixture.nativeElement.querySelector('.container-selector-ball .numbers-selectors li lottery-ball').click();
+
+    expect(component.lotteryBallsSelection.lotteryBallSelected).toEqual(1);
+
+    fixture.nativeElement.querySelector('.container-selector-ball .col-clear-selection p span').click();
+
+    expect(component.lotteryBallsSelection.lotteryBallSelected).toEqual(undefined);
+
+  });
+
 });

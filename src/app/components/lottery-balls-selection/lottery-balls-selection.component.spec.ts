@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LotteryBallComponent } from '../lottery-ball/lottery-ball.component';
 
 import { LotteryBallsSelectionComponent } from './lottery-balls-selection.component';
 
@@ -8,7 +10,13 @@ describe('LotteryBallsSelectionComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LotteryBallsSelectionComponent ]
+      declarations: [
+        LotteryBallsSelectionComponent,
+        LotteryBallComponent
+      ],
+      imports: [
+        BrowserAnimationsModule
+      ]
     })
     .compileComponents();
   });
@@ -22,4 +30,17 @@ describe('LotteryBallsSelectionComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('lottery balls', () => {
+    expect(component.lotteryBalls.length).toEqual(10);
+  });
+
+  it('lottery balls click first', () => {
+
+    fixture.nativeElement.querySelector('li lottery-ball').click();
+
+    expect(component.lotteryBallSelected).toEqual(1);
+
+  });
+
 });
