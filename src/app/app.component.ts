@@ -8,6 +8,8 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class AppComponent {
 
+  title = 'lottery-game';
+
   constructor(public translate: TranslateService) {
     this.translate.use(this.translate.getBrowserLang());
   }

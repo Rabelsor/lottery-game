@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { LotteryBallsSelectionComponent } from './lottery-balls-selection.component';
 
@@ -8,7 +9,12 @@ describe('LotteryBallsSelectionComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LotteryBallsSelectionComponent ]
+      declarations: [
+        LotteryBallsSelectionComponent
+      ],
+      imports: [
+        BrowserAnimationsModule
+      ]
     })
     .compileComponents();
   });
