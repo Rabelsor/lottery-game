@@ -3,7 +3,10 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { NgxSpinnerModule } from 'ngx-spinner';
 import { HttpLoaderFactory } from 'src/app/app.module';
+import { LotteryBallComponent } from '../lottery-ball/lottery-ball.component';
+import { LotteryBallsSelectionComponent } from '../lottery-balls-selection/lottery-balls-selection.component';
 
 import { BetSplitComponent } from './bet-split.component';
 
@@ -14,9 +17,13 @@ describe('BetSplitComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
-        BetSplitComponent
+        BetSplitComponent,
+        LotteryBallsSelectionComponent,
+        LotteryBallComponent
       ],
       imports: [
+        BrowserAnimationsModule,
+        NgxSpinnerModule,
         FormsModule,
         ReactiveFormsModule,
         HttpClientModule,

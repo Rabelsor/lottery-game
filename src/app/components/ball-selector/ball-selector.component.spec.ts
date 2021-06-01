@@ -43,4 +43,17 @@ describe('BallSelectorComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('clear selection ball', () => {
+
+    fixture.nativeElement.querySelector('.container-selector-ball .numbers-selectors li lottery-ball').click();
+
+    expect(component.lotteryBallsSelection.lotteryBallSelected).toEqual(1);
+
+    fixture.nativeElement.querySelector('.container-selector-ball .col-clear-selection p span').click();
+
+    expect(component.lotteryBallsSelection.lotteryBallSelected).toEqual(undefined);
+
+  });
+
 });
