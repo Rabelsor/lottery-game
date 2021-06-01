@@ -48,4 +48,16 @@ describe('BetSplitComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('bet min ammount', () => {
+
+    // fixture.nativeElement.querySelector('input').value = 10;
+
+    component.betForm.get('bet').setValue(4);
+
+    fixture.nativeElement.querySelector('.input-group button').click();
+
+    expect(component.minAmmount).toEqual(true);
+
+  });
 });
